@@ -3,7 +3,7 @@
 So what is binary classification? 
 earlier in 01_ single neuron.py we were doing linear regression\
 so we are predicitng a continuous value, like price of house or salary of person\
-its prediction using numbers, plotting it, doing some cool maths and getting the line we need.\
+its prediction using numbers, plotting it, doing some cool maths and getting the line we need.
 
 But what if we want to predict something that can only be 0 or 1? 
 
