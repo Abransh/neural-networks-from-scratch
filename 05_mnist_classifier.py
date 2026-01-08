@@ -37,3 +37,17 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 print(f"\nTraining set: {X_train.shape}")
 print(f"Test set: {X_test.shape}")
 
+
+#. NEURAL NETWORK CLASSES
+
+class DenseLayer:
+    """fully connected layer"""
+    
+    def __init__ (self, input_size, output_size): 
+        # Xavier initialization (good for sigmoid/tanh)
+        self.weights = np.random.randn(input_size, output_size) * np.sqrt(2 / input_size)
+        self.bias = np.zeros((1, output_size))
+
+        # Store for backward pass
+
+

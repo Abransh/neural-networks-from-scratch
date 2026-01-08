@@ -1,0 +1,1 @@
+![alt text](assets/mnist_dataset.png)
