@@ -262,7 +262,75 @@ dW2 = a1.T @ dz2
 
 
 ## Step 4: Gradient w.r.t. Hidden Layer Weights (W1)
-  
+```
+dW1 = (X.T @ dz1) / len(X)
+```
+
+**Exact same logic as Step 2, but one layer earlier:**
+```
+dL/dW1 = dL/dz1 × dz1/dW1
+       = dz1.T @ X
+```
+
+**Intuition:** 
+"How much did each input contribute to hidden layer errors?"
+
+---
+
+## 📊 Visual Summary of Backpropagation
+```
+FORWARD PASS:
+X → [z1 = X@W1+b1] → [a1 = σ(z1)] → [z2 = a1@W2+b2] → [a2 = σ(z2)] → Loss
+
+BACKWARD PASS (reverse order!):
+X ← [dW1 = X.T@dz1] ← [dz1 = dz2@W2.T * σ'(z1)] ← [dW2 = a1.T@dz2] ← [dz2 = a2-y] ← Loss
+    └─────┬─────┘     └──────────┬──────────┘      └──────┬──────┘   └────┬────┘
+    Update W1         Pass error back              Update W2      Compute error
+                     (chain rule!)
+
+
+```
+
+**We are done with explainations now**
+
+Some key insights to it
+
+Why Sigmoid Derivative Matters
+
+```
+* a1 * (1 - a1)  # Sigmoid derivative
+```
+
+**Plot of sigmoid derivative:**
+```
+σ'(z)
+  |
+0.25 |     ╱‾‾‾╲
+     |    ╱     ╲
+     |   ╱       ╲
+0.0  |__╱_________╲__
+     -5   0   5    z
+
+```
+
+## Problem: When neuron is saturated (output near 0 or 1), gradient is tiny!
+
+This causes vanishing gradients in deep networks
+This is why ReLU became popular (I build it later)
+
+##  Why Hidden Layers Can Learn
+
+Before backprop, nobody knew how to train hidden layers!
+
+- Backprop's genius:
+
+ * Hidden layers get error signals from output
+ * They adjust to minimize that error
+ * Each layer becomes a "feature detector" for the layer above
+
+
+
+
 
 
 Still there are challenges to it 
