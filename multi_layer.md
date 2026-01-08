@@ -59,9 +59,9 @@ z1[1] = 4.8*1 + 4.9*0 - 7.3 = -2.5 →  sigmoid(-2.5) = 0.08
 
 Hidden layer outputs: [0.94, 0.08]
 
-
-- Step 2: Hidden Layer → Output Layer
-
+```
+## Step 2: Hidden Layer → Output Layer
+```
 z2 = a1 @ W2 + b2
 a2 = sigmoid(z2)
 ```
@@ -78,5 +78,79 @@ b2 = [[-3.2]]    # Bias for output
 ```
 z2 = 0.94*7.2 + 0.08*(-7.1) - 3.2 = 3.2
 output = sigmoid(3.2) = 0.96 ≈ 1 ✓
+```
 
 # What Did the Hidden Neurons Learn?
+
+## This is a pretty thing, you must look at this 
+
+You'll see something like:
+```
+Input    | Hidden1 | Hidden2 | Output | Expected
+-------------------------------------------------------
+[0 0]    |  0.076  |  0.012  |  0.003 |    0
+[0 1]    |  0.942  |  0.031  |  0.998 |    1
+[1 0]    |  0.951  |  0.029  |  0.998 |    1
+[1 1]    |  0.993  |  0.986  |  0.002 |    0
+``` 
+
+Notice the pattern:
+
+- Hidden1 (OR gate): High when ANY input is 1
+  * [0,0] → 0.076 (low)
+  * [0,1] → 0.942 (high!)
+  * [1,0] → 0.951 (high!)
+  * [1,1] → 0.993 (high!)
+
+- Hidden2 (AND gate): High only when BOTH inputs are 1
+  * [0,0] → 0.012 (low)
+  * [0,1] → 0.031 (low)
+  * [1,0] → 0.029 (low)
+  * [1,1] → 0.986 (high!)
+
+
+# Visual Decision Boundary
+
+So if you are bored of maths and python
+add this code into your file and run it (its already in my file as part3 )
+
+```python
+# Visualize decision boundary
+x1_range = np.linspace(-0.5, 1.5, 300)
+x2_range = np.linspace(-0.5, 1.5, 300)
+xx1, xx2 = np.meshgrid(x1_range, x2_range)
+
+# Compute predictions for entire grid
+grid_points = np.c_[xx1.ravel(), xx2.ravel()]
+z1_grid = grid_points @ W1 + b1
+a1_grid = sigmoid(z1_grid)
+z2_grid = a1_grid @ W2 + b2
+a2_grid = sigmoid(z2_grid)
+a2_grid = a2_grid.reshape(xx1.shape)
+
+# Plot
+plt.figure(figsize=(10, 8))
+plt.contourf(xx1, xx2, a2_grid, levels=20, cmap='RdYlBu_r', alpha=0.7)
+plt.colorbar(label='Prediction (0=blue, 1=red)')
+plt.contour(xx1, xx2, a2_grid, levels=[0.5], colors='black', linewidths=3)
+
+# Plot data points
+colors = ['blue' if label == 0 else 'red' for label in y.flatten()]
+for i in range(4):
+    plt.scatter(X[i, 0], X[i, 1], c=colors[i], s=300, 
+               edgecolors='black', linewidth=3, zorder=5)
+    plt.text(X[i, 0] + 0.08, X[i, 1] + 0.08, 
+            f"{y[i,0]}", fontsize=14, fontweight='bold')
+
+plt.xlim(-0.5, 1.5)
+plt.ylim(-0.5, 1.5)
+plt.xlabel('Input 1', fontsize=12)
+plt.ylabel('Input 2', fontsize=12)
+plt.title('XOR Decision Boundary (Non-Linear!)', fontsize=14, fontweight='bold')
+plt.grid(True, alpha=0.3)
+plt.show()
+
+```
+
+
+![alt text](image.png)

@@ -101,3 +101,63 @@ for i in range(4):
     print(f"  Input: {X[i]} → Predicted: {a2_test[0, 0]:.3f} (class {pred_class}) | True: {y[i, 0]} {correct}")
 
 print("\n SUCCESS! The neural network learned XOR!")
+
+# part 2 what did neurons learn
+print("\n" + "="*60)
+print("HIDDEN LAYER ANALYSIS: What did each neuron learn?")
+print("="*60)
+
+print("\nHidden neuron activations for each input:")
+print("Input    | Hidden1 | Hidden2 | Output | Expected")
+print("-" * 55)
+
+for i in range(4):
+    z1_test = X[i:i+1] @ W1 + b1
+    a1_test = sigmoid(z1_test)
+    z2_test = a1_test @ W2 + b2
+    a2_test = sigmoid(z2_test)
+    
+    print(f"{X[i]}  |  {a1_test[0,0]:.3f}  |  {a1_test[0,1]:.3f}  |  {a2_test[0,0]:.3f}  |    {y[i,0]}")
+
+print("\nInterpretation:")
+print("Hidden Neuron 1 learns: 'Is at least one input 1?' (OR gate)")
+print("Hidden Neuron 2 learns: 'Are both inputs 1?' (AND gate)")
+print("Output combines them to get XOR!")
+
+# part 3 visualise the decision boundary
+
+
+# Visualize decision boundary
+x1_range = np.linspace(-0.5, 1.5, 300)
+x2_range = np.linspace(-0.5, 1.5, 300)
+xx1, xx2 = np.meshgrid(x1_range, x2_range)
+
+# Compute predictions for entire grid
+grid_points = np.c_[xx1.ravel(), xx2.ravel()]
+z1_grid = grid_points @ W1 + b1
+a1_grid = sigmoid(z1_grid)
+z2_grid = a1_grid @ W2 + b2
+a2_grid = sigmoid(z2_grid)
+a2_grid = a2_grid.reshape(xx1.shape)
+
+# Plot
+plt.figure(figsize=(10, 8))
+plt.contourf(xx1, xx2, a2_grid, levels=20, cmap='RdYlBu_r', alpha=0.7)
+plt.colorbar(label='Prediction (0=blue, 1=red)')
+plt.contour(xx1, xx2, a2_grid, levels=[0.5], colors='black', linewidths=3)
+
+# Plot data points
+colors = ['blue' if label == 0 else 'red' for label in y.flatten()]
+for i in range(4):
+    plt.scatter(X[i, 0], X[i, 1], c=colors[i], s=300, 
+               edgecolors='black', linewidth=3, zorder=5)
+    plt.text(X[i, 0] + 0.08, X[i, 1] + 0.08, 
+            f"{y[i,0]}", fontsize=14, fontweight='bold')
+
+plt.xlim(-0.5, 1.5)
+plt.ylim(-0.5, 1.5)
+plt.xlabel('Input 1', fontsize=12)
+plt.ylabel('Input 2', fontsize=12)
+plt.title('XOR Decision Boundary (Non-Linear!)', fontsize=14, fontweight='bold')
+plt.grid(True, alpha=0.3)
+plt.show()
