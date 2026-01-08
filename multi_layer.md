@@ -330,9 +330,23 @@ Before backprop, nobody knew how to train hidden layers!
 
 
 
+# DONE NO MORE I PROMISE 
+
+SO WHAT I HAVE DONE TILL NOW?
+
+Single neurons (regression & classification)
+Why we need layers (XOR problem)
+Multi-layer networks (architecture)
+Backpropagation (the learning algorithm)
 
 
+Next What am i gonna do?
 
-Still there are challenges to it 
+Scale up: Build a proper class-based network for MNIST (handwritten digits)
+Add features: Different activation functions (ReLU, Tanh)
+Visualize more: Gradient flow, weight distributions
+Optimize: Better weight initialization, learning rate schedules
 
-> The challenge:The hidden layer doesn't see the actual error directly - it's hidden! We need to propagate the error backwards.
+so lets see, maybe all of it ahahahha
+
+> thanks for reading
