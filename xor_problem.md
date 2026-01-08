@@ -291,7 +291,7 @@ while (0,0) and (1,1) also need to be on the SAME side (both class 0).
   * Maybe a vertical line: x1 = 0.5
   * Maybe a diagonal: x1 + x2 = 1
 
-- Each attempt:
+  * Each attempt:
 
   * Gets 2 points right, 2 points wrong
   * Gradient descent says "this isn't working!"
@@ -315,12 +315,12 @@ sigmoid(0) = 1 / (1 + e^0) = 1/2 = 0.5
 
 ***Gradient descent drove w1, w2, and b close to zero, making every prediction 0.5!***
 
-when did this problem orignate and who solve it?
+# when did this problem orignate and who solve it?
 
 1969: Marvin Minsky and Seymour Papert -> they told about the problem in their book "Perceptrons" and it almost killed the field of neural networks for a decade
 
 # 1986: The Comeback
 
-Researchers discovered backpropagation (which we're about to do) and the field boomed again
+Researchers discovered backpropagation (which I am about to do) and the field boomed again
 
 *Showed that multi-layer networks CAN solve XOR*
