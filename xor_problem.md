@@ -254,3 +254,9 @@ x2
 # Challenge: Draw ONE straight line that puts all BLUE on one side and all RED on the other.
 
 > Impossible! No matter where you draw the line, you'll always have at least one BLUE and one RED on the same side.
+
+_This is called NOT LINEARLY SEPARABLE._
+
+Mathematical Explanation
+
+A single neuron's decision boundary is:
