@@ -231,3 +231,21 @@ _The neuron gave up completely and said "I don't know!" to every input._
 
 
 at some point during training it got lucky and classified 3 out of 4 inputs but it couldnt maintain it 
+
+
+#  Why It Failed - The Deep Reason
+
+_Visual Explanation_
+
+```
+x2
+        ↑
+    1   |   RED(1)    BLUE(0)
+        |     ●         ●
+        |
+        |
+    0   |   BLUE(0)   RED(1)
+        |     ●         ●
+        |
+        └─────────────────→ x1
+            0         1
