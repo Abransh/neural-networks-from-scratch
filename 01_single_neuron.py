@@ -83,12 +83,50 @@ Loss is like a "wrongness score". Lower loss = better predictions!
      # 3. CALCULATE GRADIENTS: Which direction to adjust w and b?
     dw = (2/len(X)) * np.sum((y_pred - y)*X) # partial derivative of loss with respect to w
     db = (2/len(X)) * np.sum((y_pred - y)) # partial derivative of loss with respect to b
+    '''
+    now thing we did above is also magical This is calculus - finding derivatives
+
+    dw = (2/len(X)) * np.sum((y_pred - y) * X)
+    Breaking it down:
+    (y_pred - y) → How wrong we are for each prediction
+    * X → Multiply by input (this is the calculus part!)
+    np.sum(...) → Add up all contributions
+    (2/len(X)) * → Average it and apply the derivative constant
+
+    Intuition:
+If we're wrong on a data point with large X value, changing w has BIG effect.
+If we're wrong on a data point with small X value, changing w has small effect.
+
+
+
+db = (2/len(X)) * np.sum(y_pred - y)
+```
+
+Simpler! Just average of all errors (times 2 from derivative).
+
+**Why simpler?**
+Because bias is just added (not multiplied by anything), so the derivative of `b` is just `1`.
+
+**Math refresher (if you want):**
+```
+Loss = (y_pred - y)²
+     = (w*X + b - y)²
+
+Take derivative w.r.t. w:
+dLoss/dw = 2(w*X + b - y) * X  
+         = 2(y_pred - y) * X
+
+Take derivative w.r.t. b:
+dLoss/db = 2(w*X + b - y) * 1
+         = 2(y_pred - y)
+
     
+    '''
     # 4 update the parameters: take a step in the direction of the gradient 
     
     w = w - learning_rate * dw 
     b = b - learning_rate * db 
-
+ # gradient secent here going above 
     # pring progress 
     if epoch % 10 == 0 : 
         print(f"Epoch {epoch:3d} | Loss: {loss:.4f} | w: {w[0,0]:.4f} | b: {b[0,0]:.4f}")
