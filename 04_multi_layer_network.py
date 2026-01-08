@@ -56,3 +56,48 @@ for epoch in range(epochs):
     epsilon = 1e-15
     a2_safe = np.clip(a2 epsilon, 1 - epsilon)
     loss = -np.mean(y * np.log(a2_safe) + (1 - y) * np.log(1 - a2_safe))
+    loss_history_mlp.append(loss)
+
+    # accuracy
+
+    predictions = (a2 > 0.5).astype(int)
+    accuracy = np.mean(accuracy == y)
+    accuracy_histroy_mlp.append(float(accuracy))
+
+
+    # now we do backward pass or backpropogation
+
+    dz2 = a2 - y
+    dW2 = (a1.T @ dz2) / len(X) # (2, 4) @ (4, 1) = (2, 1)
+    db2 = np.sum(dz2, keepdims = true, axis = 0) / len(X)
+
+     # Hidden layer gradients (backprop through sigmoid)
+
+    dz1 = (dz2 @ W2.T) *  a1 * (1 - a1) # (4, 1) @ (1, 2) * (4, 2) = (4, 2)
+    dw1 = (X.T @ dz1) / len(X) # (2, 4) @ (4, 2) = (2, 2)
+    db1 = np.sum(dz1, keepdims = true, axis = 0) / len(X)
+
+    # updating the params 
+    W2 -= learning_rate * dW2
+    b2 -= learning_rate * db2
+    W1 -= learning_rate * dW1
+    b1 -= learning_rate * db1
+
+    if epoch % 500 == 0:
+        print(f"Epoch {epoch:4d} | Loss: {loss:.4f} | Accuracy: {accuracy*100:.1f}%")
+
+print(f"\nFinal Loss: {loss:.4f}")
+print(f"Final Accuracy: {accuracy*100:.1f}%")
+print(f"\n✅ Neural network predictions:")
+for i in range(4):
+    # Forward pass for this input
+    z1_test = X[i:i+1] @ W1 + b1
+    a1_test = sigmoid(z1_test)
+    z2_test = a1_test @ W2 + b2
+    a2_test = sigmoid(z2_test)
+    
+    pred_class = 1 if a2_test[0, 0] > 0.5 else 0
+    correct = "✓" if pred_class == y[i, 0] else "✗"
+    print(f"  Input: {X[i]} → Predicted: {a2_test[0, 0]:.3f} (class {pred_class}) | True: {y[i, 0]} {correct}")
+
+print("\n SUCCESS! The neural network learned XOR!")
