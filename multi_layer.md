@@ -154,3 +154,37 @@ plt.show()
 
 
 ![results](assets/image.png)
+
+
+# so it concludes with with a fact that Backpropagation is the Magic of Training Deep Networks
+
+Now I talk about some maths to understand backpropagation
+
+So if you are a fan of maths and you like calculus you must know chain rule 
+it says 
+```
+If y = f(g(x)), then:
+dy/dx = (dy/dg) × (dg/dx)
+```
+
+Our network:
+```
+Input (x) → Hidden (h) → Output (y) → Loss (L)
+```
+**To update hidden layer weights, we need: dL/dW1**
+
+Chain rule says:
+```
+dL/dW1 = dL/dy × dy/dh × dh/dW1
+         └──┬──┘ └──┬──┘ └──┬──┘
+            │       │       │
+    Output  │  Hidden│   Local
+    gradient│  gradient  gradient
+```
+
+
+
+
+Still there are challenges to it 
+
+> The challenge:The hidden layer doesn't see the actual error directly - it's hidden! We need to propagate the error backwards.
