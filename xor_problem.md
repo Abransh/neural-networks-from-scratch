@@ -260,3 +260,20 @@ _This is called NOT LINEARLY SEPARABLE._
 Mathematical Explanation
 
 A single neuron's decision boundary is:
+
+```markdown
+w1*x1 + w2*x2 + b = 0
+```
+
+This is always a straight line (in 2D) or a hyperplane (in higher dimensions).
+
+For XOR to work, you'd need:
+```
+(0,0) → one side of line → predict 0 ✓
+(0,1) → other side of line → predict 1 ✓
+(1,0) → other side of line → predict 1 ✓
+(1,1) → one side of line → predict 0 ✓
+
+```
+
+
