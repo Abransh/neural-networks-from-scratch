@@ -43,11 +43,41 @@ print("-" * 50)
 #part 3
 for epoch in range(epochs):
     # forward pass: making the predicitons
-    y_pred = w * X + b 
+    y_pred = w * X + b  # so what it does is it takes input x ( out 100 data points) and multiplies it with weight (1x1 matrix) and adds bias (1x1 matrix
 
     #2 CALCULATE LOSS: How wrong are we? (I am never wrong but python or neuron can be)
 
     loss= np.mean((y_pred - y)**2) # mean squared error
+     
+    '''
+    so above you see I defined loss now i will tell what it actually means
+    **Step 1:** `(y_pred - y)`
+    - Subtract actual values from predictions
+    - This gives us the error for each point
+    - Example: If predicted 5 but actual was 7, error = 5 - 7 = -2
+
+    **Step 2:** `** 2` (square it)
+    - Why square? Because errors can be negative or positive
+    - Squared makes everything positive: (-2)² = 4, (2)² = 4
+    - Also: bigger errors get punished MORE (error of 10 → 100, much worse than error of 1 → 1)
+
+    **Step 3:** `np.mean(...)` (take average)
+    - We have 100 errors (one per data point)
+    - Average them to get ONE number representing "how wrong we are overall"
+    **Visual example:**
+  
+    Data point 1: predicted 5, actual 7  → error = -2  → squared = 4
+    Data point 2: predicted 3, actual 3  → error = 0   → squared = 0  
+    Data point 3: predicted 8, actual 6  → error = 2   → squared = 4
+
+Average of all squared errors = loss
+
+
+Intuition:
+Loss is like a "wrongness score". Lower loss = better predictions!
+
+
+    '''
     loss_history.append(loss)
     
      # 3. CALCULATE GRADIENTS: Which direction to adjust w and b?
