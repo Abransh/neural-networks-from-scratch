@@ -237,11 +237,32 @@ dW2 = (a1.T @ dz2) / len(X)
 dL/dW2 = dL/dz2 × dz2/dW2
 ```
 Recall the forward pass:
+```
+z2 = a1 @ W2 + b2
+```
+**Derivative of z2 w.r.t. W2:**
+```
+dz2/dW2 = a1.T  (this is why we use a1.T in the gradient!)
+```
+
+## Full gradient:
+
+```python
+dW2 = a1.T @ dz2
+     └──┬──┘ └─┬─┘
+        │      │
+   Activations Error
+   from hidden from output
+```
+
+- Intuition: "How much did each hidden neuron contribute to the error?"
+
+  * If hidden neuron had high activation AND error is high → big gradient
+  * If hidden neuron was off (low activation) → small gradient (it wasn't involved)
 
 
-
-
-
+## Step 4: Gradient w.r.t. Hidden Layer Weights (W1)
+  
 
 
 Still there are challenges to it 
