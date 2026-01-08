@@ -10,3 +10,19 @@ for noise we use randn because it gives us a bell curve of noise (most points cl
 for 2nd part we intialize the neuron with random weights and bias 
 define learning rate and epochs 
 define loss history
+
+
+for 3rd part we define the forward pass 
+we make the model run forward pass and calculate the loss 
+we update the weights and bias and get closer to the line 
+
+for 4th part its just visualizing the learning process 
+
+I built a complete learning system:
+
+Forward pass (make predictions)
+Loss calculation (measure error)
+Backpropagation (calculate gradients)
+Parameter update (gradient descent)
+  
+in 01_single_neuron.pu 
