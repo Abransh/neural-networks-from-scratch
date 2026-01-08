@@ -106,3 +106,7 @@ print("\n❌ Single neuron gets stuck at ~50% accuracy!")
 print("It can only learn: 'always predict 0' or 'always predict 1'")
 print("or guess randomly - it CANNOT learn XOR!")
 
+
+
+# go to 04_multi_layer_network.py for the solution and how we attempt to solve this XOR issue using backpropogation and multi layer networks
+# read xo_problem.md for mathematical analysis
