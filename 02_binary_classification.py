@@ -56,3 +56,71 @@ print("Input  | Output")
 print("-" * 20)
 for val in test_values:
     print(f"{val:6.1f} | {sigmoid(val):.6f}")    
+
+
+#  Initialize Neuron (Now with 2 inputs!)
+# Now we need 2 weights (one for each feature)
+w = np.random.randn(2, 1)    # (2, 1) - 2 weights
+b = np.random.randn(1, 1)    # (1, 1) - 1 bias
+
+print("\nInitial parameters:")
+print(f"w1 (weight for feature 1): {w[0, 0]:.4f}")
+print(f"w2 (weight for feature 2): {w[1, 0]:.4f}")
+print(f"b  (bias):                 {b[0, 0]:.4f}")
+
+
+# hyperparameters
+
+learning_rate = 0.1  # Slightly higher for classification
+epochs = 1000 
+
+
+# history tracking 
+
+loss_history = []
+accuracy_history = []
+
+
+# The Training Loop (With New Loss Function!)
+print("\nStarting training...")
+print("-" * 60)
+
+for epoch in range(epochs): 
+    #1 forward pass: make predictions
+    z = X @ w + b       # Linear combination: z = w1*x1 + w2*x2 + b
+    y_pred= sigmoid(z)  # Apply sigmoid: squash to [0, 1]
+
+    # 2. CALCULATE LOSS: Binary Cross-Entropy 
+
+    epislon = 1e-15 # Small number to avoid log(0)
+    y_pred_safe = np.clip(y_pred, epislon, 1-epislon)
+    loss = -np.mean(Y * np.log(y_pred_safe) + (1-Y) * np.log(1-y_pred_safe))
+    loss_history.append(loss)
+
+    # Calculate accuracy
+    predictions = (y_pred > 0.5).astype(int)  # Round: >0.5 → 1, else → 0
+    accuracy = np.mean(predictions == Y)
+    accuracy_history.append(accuracy)
+
+    # 3. CALCULATE GRADIENTS
+
+    dz = y_pred - Y          # Derivative of sigmoid + BCE is beautifully simple!
+    dw = (1/len(X)) * (X.T @ dz)  # (2, 100) @ (100, 1) = (2, 1)
+    db = (1/len(X)) * np.sum(dz)
+
+    # 4. UPDATE PARAMETERS
+    w = w - learning_rate * dw
+    b = b - learning_rate * db
+
+    # Print progress
+    if epoch % 100 == 0:
+        print(f"Epoch {epoch:4d} | Loss: {loss:.4f} | Accuracy: {accuracy*100:.1f}%")
+
+print("-" * 60)
+print(f"\nFinal Results:")
+print(f"Loss:     {loss:.4f}")
+print(f"Accuracy: {accuracy*100:.1f}%")
+print(f"\nLearned weights:")
+print(f"w1: {w[0, 0]:.4f}")
+print(f"w2: {w[1, 0]:.4f}")
+print(f"b:  {b[0, 0]:.4f}")
