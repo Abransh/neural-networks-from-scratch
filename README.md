@@ -25,4 +25,4 @@ Loss calculation (measure error)
 Backpropagation (calculate gradients)
 Parameter update (gradient descent)
   
-in 01_single_neuron.pu 
+in 01_single_neuron.py
