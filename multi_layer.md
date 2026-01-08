@@ -334,19 +334,21 @@ Before backprop, nobody knew how to train hidden layers!
 
 SO WHAT I HAVE DONE TILL NOW?
 
-Single neurons (regression & classification)
-Why we need layers (XOR problem)
-Multi-layer networks (architecture)
+Single neurons (regression & classification)\
+Why we need layers (XOR problem)\
+Multi-layer networks (architecture)\
 Backpropagation (the learning algorithm)
 
 
 Next What am i gonna do?
 
-Scale up: Build a proper class-based network for MNIST (handwritten digits)
-Add features: Different activation functions (ReLU, Tanh)
-Visualize more: Gradient flow, weight distributions
+Scale up: Build a proper class-based network for MNIST (handwritten digits)\
+Add features: Different activation functions (ReLU, Tanh)\
+Visualize more: Gradient flow, weight distributions\
 Optimize: Better weight initialization, learning rate schedules
 
 so lets see, maybe all of it ahahahha
+
+Next i will make "hello world" of deep learning we will do MNIST with Class-Based Network
 
 > thanks for reading
