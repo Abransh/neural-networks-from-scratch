@@ -178,9 +178,68 @@ Chain rule says:
 dL/dW1 = dL/dy × dy/dh × dh/dW1
          └──┬──┘ └──┬──┘ └──┬──┘
             │       │       │
-    Output  │  Hidden│   Local
-    gradient│  gradient  gradient
+            │       │       │
+         Output    Hidden   Local
+         gradient  gradient gradient
 ```
+
+***This is backpropagation - computing gradients layer by layer, backwards!***
+
+So the file has new code to it 
+as Backward Pass
+
+written as 
+```python
+# ===== BACKWARD PASS (Backpropagation) =====
+# Output layer gradients
+dz2 = a2 - y                    # (4, 1)
+dW2 = (a1.T @ dz2) / len(X)     # (2, 4) @ (4, 1) = (2, 1)
+db2 = np.sum(dz2, axis=0, keepdims=True) / len(X)
+
+# Hidden layer gradients (backprop through sigmoid)
+dz1 = (dz2 @ W2.T) * a1 * (1 - a1)  # (4, 1) @ (1, 2) * (4, 2) = (4, 2)
+dW1 = (X.T @ dz1) / len(X)           # (2, 4) @ (4, 2) = (2, 2)
+db1 = np.sum(dz1, axis=0, keepdims=True) / len(X)
+```
+
+## what it means?
+```
+dz2 = a2 - y
+```
+**what is this?**
+For Binary Cross-Entropy loss with sigmoid, the math works out beautifully:
+```
+dz2 = a2 - y
+```
+
+
+This is the derivative of loss w.r.t. the output layer's pre-activation (z2).
+
+**Intuition:**
+- If predicted 0.9 but true is 1 → error = -0.1 (should increase)
+- If predicted 0.1 but true is 0 → error = +0.1 (should decrease)
+
+**For our XOR example, one iteration:**
+```
+Input [1, 0], true output: 1
+Predicted: 0.5 (initially)
+dz2 = 0.5 - 1.0 = -0.5
+```
+This means: "output is too low by 0.5, need to increase it!"
+
+## Step 2: Gradient w.r.t. Output Layer Weights (W2)
+
+```
+dW2 = (a1.T @ dz2) / len(X)
+```
+**Chain rule:** 
+```
+dL/dW2 = dL/dz2 × dz2/dW2
+```
+Recall the forward pass:
+
+
+
 
 
 
