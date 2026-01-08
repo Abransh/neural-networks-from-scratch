@@ -31,9 +31,9 @@ Y = Y[indices]
 
 # visualizing the data
 plt.figure(figsize=(8, 6))
-plt.scatter(X[y.flatten() == 0][:, 0], X[y.flatten() == 0][:, 1], 
+plt.scatter(X[Y.flatten() == 0][:, 0], X[Y.flatten() == 0][:, 1], 
             c='blue', label='Class 0', alpha=0.6, edgecolors='k')
-plt.scatter(X[y.flatten() == 1][:, 0], X[y.flatten() == 1][:, 1], 
+plt.scatter(X[Y.flatten() == 1][:, 0], X[Y.flatten() == 1][:, 1], 
             c='red', label='Class 1', alpha=0.6, edgecolors='k')
 plt.xlabel('Feature 1')
 plt.ylabel('Feature 2')
