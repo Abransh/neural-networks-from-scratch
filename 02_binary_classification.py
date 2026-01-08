@@ -87,7 +87,7 @@ print("-" * 60)
 
 for epoch in range(epochs): 
     #1 forward pass: make predictions
-    z = X @ w + b       # Linear combination: z = w1*x1 + w2*x2 + b
+    z = X @ w + b       # Linear combination: z = w1*x1 + w2*x2 + b aka matrix operation
     y_pred= sigmoid(z)  # Apply sigmoid: squash to [0, 1]
 
     # 2. CALCULATE LOSS: Binary Cross-Entropy 

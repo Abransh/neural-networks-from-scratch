@@ -111,3 +111,22 @@ loss = -np.mean(y * np.log(y_pred) + (1 - y) * np.log(1 - y_pred))
                 │                             │
          When y=1 (true class 1)         When y=0 (true class 0)
 
+
+# Now what we have to solve is XOR problem 
+
+Input 1 | Input 2 | Output
+--------|---------|--------
+   0    |    0    |   0
+   0    |    1    |   1
+   1    |    0    |   1
+   1    |    1    |   0
+
+Pattern: Output is 1 when inputs are DIFFERENT, 0 when they're SAME.
+
+```markdown
+The Problem: Single Neurons CAN'T Solve This!
+```
+
+for this we need to solve it in 03_xor_problem.py
+
+refer to xor_problem.md for more details
