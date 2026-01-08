@@ -277,3 +277,50 @@ For XOR to work, you'd need:
 ```
 
 
+But (0,1) and (1,0) need to be on the SAME side (both class 1),
+while (0,0) and (1,1) also need to be on the SAME side (both class 0).
+
+***This is geometrically impossible with a single line!***
+
+# What the Neuron Actually Did
+
+- Phase 1: Initial Attempts (Epochs 0-1000)
+  * The neuron tried different lines:
+
+  * Maybe a horizontal line: x2 = 0.5
+  * Maybe a vertical line: x1 = 0.5
+  * Maybe a diagonal: x1 + x2 = 1
+
+- Each attempt:
+
+  * Gets 2 points right, 2 points wrong
+  * Gradient descent says "this isn't working!"
+
+- Phase 2: Giving Up (Epochs 1000+)  
+```
+If I can't separate them perfectly, what's the best I can do?
+
+Answer: Predict 0.5 for everything!
+- This gives loss of 0.6931 per point
+- It's the "least wrong" I can be when I have no idea
+```
+
+**The math behind 0.5 predictions:**
+
+When weights approach zero:
+```
+z = w1*x1 + w2*x2 + b → 0
+sigmoid(0) = 1 / (1 + e^0) = 1/2 = 0.5
+```
+
+***Gradient descent drove w1, w2, and b close to zero, making every prediction 0.5!***
+
+when did this problem orignate and who solve it?
+
+1969: Marvin Minsky and Seymour Papert -> they told about the problem in their book "Perceptrons" and it almost killed the field of neural networks for a decade
+
+# 1986: The Comeback
+
+Researchers discovered backpropagation (which we're about to do) and the field boomed again
+
+*Showed that multi-layer networks CAN solve XOR*
