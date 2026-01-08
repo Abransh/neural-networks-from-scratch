@@ -69,10 +69,12 @@ Input  | Output
 3. The New Loss Function: Binary Cross-Entropy
 
 Old loss (MSE for regression):
-
+```python
 loss = np.mean((y_pred - y) ** 2)
+```
 
 New loss (BCE for classification):
+```python
 loss = -np.mean(y * np.log(y_pred) + (1 - y) * np.log(1 - y_pred))
 ```
 
