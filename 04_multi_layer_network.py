@@ -9,7 +9,7 @@ print("="*60)
 # network architecture 
 # input(2) -> hidden layer ( 2 neurons ) -> output (1)
 
-np.seed.random(42)
+np.random.seed(42)
 
 X= np.array([[0,0], [0,1], [1,0], [1,1]])
 
@@ -54,28 +54,28 @@ for epoch in range(epochs):
 
     # loss 
     epsilon = 1e-15
-    a2_safe = np.clip(a2 epsilon, 1 - epsilon)
+    a2_safe = np.clip(a2, epsilon, 1 - epsilon)
     loss = -np.mean(y * np.log(a2_safe) + (1 - y) * np.log(1 - a2_safe))
     loss_history_mlp.append(loss)
 
     # accuracy
 
     predictions = (a2 > 0.5).astype(int)
-    accuracy = np.mean(accuracy == y)
-    accuracy_histroy_mlp.append(float(accuracy))
+    accuracy = np.mean(predictions == y)
+    accuracy_history_mlp.append(float(accuracy))
 
 
     # now we do backward pass or backpropogation
 
     dz2 = a2 - y
     dW2 = (a1.T @ dz2) / len(X) # (2, 4) @ (4, 1) = (2, 1)
-    db2 = np.sum(dz2, keepdims = true, axis = 0) / len(X)
+    db2 = np.sum(dz2, keepdims = True , axis = 0) / len(X)
 
      # Hidden layer gradients (backprop through sigmoid)
 
     dz1 = (dz2 @ W2.T) *  a1 * (1 - a1) # (4, 1) @ (1, 2) * (4, 2) = (4, 2)
-    dw1 = (X.T @ dz1) / len(X) # (2, 4) @ (4, 2) = (2, 2)
-    db1 = np.sum(dz1, keepdims = true, axis = 0) / len(X)
+    dW1 = (X.T @ dz1) / len(X) # (2, 4) @ (4, 2) = (2, 2)
+    db1 = np.sum(dz1, keepdims = True, axis = 0) / len(X)
 
     # updating the params 
     W2 -= learning_rate * dW2
