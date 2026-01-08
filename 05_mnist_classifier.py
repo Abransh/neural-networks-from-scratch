@@ -48,6 +48,14 @@ class DenseLayer:
         self.weights = np.random.randn(input_size, output_size) * np.sqrt(2 / input_size)
         self.bias = np.zeros((1, output_size))
 
-        # Store for backward pass
+        # Store for backward pass\
+        
+        self.input = None
+        self.output = None
+        
+        # Gradients
+        self.dweights = None
+        self.dbias = None
+
 
 
