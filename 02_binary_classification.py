@@ -30,3 +30,29 @@ Y = Y[indices]
 
 
 # visualizing the data
+plt.figure(figsize=(8, 6))
+plt.scatter(X[y.flatten() == 0][:, 0], X[y.flatten() == 0][:, 1], 
+            c='blue', label='Class 0', alpha=0.6, edgecolors='k')
+plt.scatter(X[y.flatten() == 1][:, 0], X[y.flatten() == 1][:, 1], 
+            c='red', label='Class 1', alpha=0.6, edgecolors='k')
+plt.xlabel('Feature 1')
+plt.ylabel('Feature 2')
+plt.title('Binary Classification Dataset')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+# defining sigmoid activation function 
+def sigmoid(z):
+    """squashes any number into the range [0, 1]"""
+    return 1 / (1 + np.exp(-z))
+
+
+# Test sigmoid function
+test_values = np.array([-10, -5, -1, 0, 1, 5, 10])
+print("Testing Sigmoid:")
+print("Input  | Output")
+print("-" * 20)
+for val in test_values:
+    print(f"{val:6.1f} | {sigmoid(val):.6f}")    
