@@ -28,8 +28,8 @@ Total: 9 parameters
 
 First we do  Forward Pass - Step by Step
 
-- Step 1: Input Layer → Hidden Layer
-
+## Step 1: Input Layer → Hidden Layer
+```
 z1 = X @ W1 + b1
 a1 = sigmoid(z1)
 ```
